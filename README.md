@@ -7,15 +7,15 @@ This is my take on the [Advent of Code 2021](https://adventofcode.com/2021), wri
 ### Initialize a new day
 
 ```bash
-yarn start init 01 # the day you want to initialize
+npm start init 01 # the day you want to initialize
 ```
 
 ### Execute day
 
 ```bash
-yarn start exec day01 # run part one and two of day01
-yarn start exec -1 day01 # run part one of day01
-yarn start exec -2 day01 # run part two of day01
+npm start exec day01 # run part one and two of day01
+npm start exec -1 day01 # run part one of day01
+npm start exec -2 day01 # run part two of day01
 ```
 
 ## Meta
