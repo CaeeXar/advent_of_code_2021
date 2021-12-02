@@ -19,8 +19,8 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "yarn node -r ts-node/register src/index.ts",
-    "build": "yarn tsc"
+    "start": "node -r ts-node/register src/index.ts",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
