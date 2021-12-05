@@ -1,3 +1,9 @@
-export const solvePartOne = (input: string) => {};
+import _ from "lodash";
+import { calcSum, getBingoTable } from "./logic";
+import { parsePartOne } from "./parse";
 
-export const solvePartTwo = (input: string) => {};
+export const solvePartOne = (input: string) => {
+    return calcSum(getBingoTable(parsePartOne(input)));
+};
+
+export const solvePartTwo = (input: string) => { };
