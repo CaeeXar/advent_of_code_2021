@@ -1,3 +1,9 @@
-export const solvePartOne = (input: string) => {};
+import { simulate } from "./logic";
+import { parsePartOne } from "./parse";
 
-export const solvePartTwo = (input: string) => {};
+export const solvePartOne = (input: string) => {
+    let parsed = parsePartOne(input);
+    return simulate(parsed).length;
+};
+
+export const solvePartTwo = (input: string) => { };
