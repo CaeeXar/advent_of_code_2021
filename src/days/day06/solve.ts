@@ -3,7 +3,10 @@ import { parsePartOne } from "./parse";
 
 export const solvePartOne = (input: string) => {
     let parsed = parsePartOne(input);
-    return simulate(parsed).length;
+    return simulate(parsed);
 };
 
-export const solvePartTwo = (input: string) => { };
+export const solvePartTwo = (input: string) => {
+    let parsed = parsePartOne(input);
+    return simulate(parsed, 256);
+};

@@ -1,29 +1,35 @@
 import _ from "lodash";
 
-export const simulate = (initialData: number[], days: number = 80): number[] => {
-    let fishes = _.cloneDeep(initialData);
+export const simulate = (initialData: number[], days: number = 80): number => {
+    let map = _.countBy(initialData),
+        copy: { [key: number]: number } = {
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0,
+            7: 0,
+            8: 0,
+            ...map
+        };
 
-    for (let i = 0; i < days; i++) {
-        let newFishes = 0;
+    for (let day = 0; day < days; day++) {
+        let newFish = copy[0];
 
-        for (let fish = 0; fish < fishes.length; fish++) {
-            let daysUntilNew = fishes[fish];
-
-            if (daysUntilNew > 0) {
-                fishes[fish]--;
-            }
-            else {
-                fishes[fish] = 6;
-                newFishes++;
-            }
+        for (let timer = 1; timer < 9; timer++) {
+            copy[timer - 1] = copy[timer];
         }
 
-        for (let fish = 0; fish < newFishes; fish++) {
-            fishes.push(8);
-        }
-
-        newFishes = 0;
+        copy[8] = newFish;
+        copy[6] += newFish;
     }
 
-    return fishes;
+    let sum = 0;
+    for (const value of Object.values(copy)) {
+        sum += value;
+    }
+
+    return sum;
 };
