@@ -2,8 +2,9 @@ import { calculateFuel } from "./logic";
 import { parsePartOne } from "./parse";
 
 export const solvePartOne = (input: string) => {
-    let positions = parsePartOne(input);
-    return calculateFuel(positions);
+    return calculateFuel(parsePartOne(input), false);
 };
 
-export const solvePartTwo = (input: string) => { };
+export const solvePartTwo = (input: string) => {
+    return calculateFuel(parsePartOne(input), true);
+};

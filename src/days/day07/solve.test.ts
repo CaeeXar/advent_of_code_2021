@@ -10,12 +10,12 @@ describe("Part one", () => {
     });
 });
 
-// describe("Part two", () => {
-//     test("solves the example", () => {
-//         const input = `16,1,2,0,4,2,7,1,2,14`;
+describe("Part two", () => {
+    test("solves the example", () => {
+        const input = `16,1,2,0,4,2,7,1,2,14`;
 
-//         const result = solvePartTwo(input);
+        const result = solvePartTwo(input);
 
-//         expect(result).toEqual(26984457539);
-//     });
-// });
+        expect(result).toEqual(168);
+    });
+});
