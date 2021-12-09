@@ -1,4 +1,4 @@
-export const parsePartTwo = (input: string) => {
+export const parsePartTwo = (input: string): { before: string[], after: string[] } => {
     let lines = input.split("\n"), before: string[] = [], after: string[] = [];
 
     lines.forEach(line => {
