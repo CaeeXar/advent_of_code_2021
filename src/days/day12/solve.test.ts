@@ -16,21 +16,18 @@ b-end`;
     });
 });
 
-// describe("Part one", () => {
-//     test("solves the example", () => {
-//         const input = `5483143223
-// 2745854711
-// 5264556173
-// 6141336146
-// 6357385478
-// 4167524645
-// 2176841721
-// 6882881134
-// 4846848554
-// 5283751526`;
+describe("Part one", () => {
+    test("solves the example", () => {
+        const input = `start-A
+start-b
+A-c
+A-b
+b-d
+A-end
+b-end`;
 
-//         const result = solvePartTwo(input);
+        const result = solvePartTwo(input);
 
-//         expect(result).toEqual(195);
-//     });
-// });
+        expect(result).toEqual(36);
+    });
+});
