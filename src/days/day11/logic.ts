@@ -1,5 +1,10 @@
 import _ from "lodash";
 
+export interface Options {
+    getFirstSync?: boolean;
+    steps?: number;
+};
+
 let tracker = [..._.range(0, 10, 0).map(d => _.range(0, 10, 0))]
 
 const _flash = (data: number[][], x: number, y: number): number => {
@@ -13,12 +18,17 @@ const _flash = (data: number[][], x: number, y: number): number => {
         data[y][x] = 0;
         tracker[y][x] = 1;
 
-        for (let i = -1; i <= 1; i++) {
-            for (let j = -1; j <= 1; j++) {
-                if (i === 0 && j === 0) continue;
-                flash += _flash(data, x + j, y + i);
-            }
-        }
+        // UP DOWN LEFT RIGHT
+        flash += _flash(data, x, y - 1);
+        flash += _flash(data, x, y + 1);
+        flash += _flash(data, x - 1, y);
+        flash += _flash(data, x + 1, y);
+        // LEFT/RIGHT UP
+        flash += _flash(data, x - 1, y - 1);
+        flash += _flash(data, x + 1, y - 1);
+        // LEFT/RIGHT DOWN
+        flash += _flash(data, x - 1, y + 1);
+        flash += _flash(data, x + 1, y + 1);
 
         return flash;
     }
@@ -38,13 +48,19 @@ const flash = (data: number[][]): number => {
     return flashesPerStep;
 }
 
-export const calculateFlashes = (data: number[][], steps: number) => {
+const isSync = (data: number[][]) => {
+    return _.every(data, row => _.every(row, d => d === 0));
+}
+
+export const calculateFlashes = (data: number[][], options: Options = { steps: 100 }) => {
+    if (!options.steps) options["steps"] = 100;
     let clone = _.cloneDeep(data);
     let flashes = 0;
 
-    for (let i = 0; i < steps; i++) {
+    for (let i = 0; i < options.steps || (options.getFirstSync ? true : false); i++) {
         flashes += flash(clone);
         tracker = [..._.range(0, 10, 0).map(d => _.range(0, 10, 0))]
+        if (options.getFirstSync && isSync(clone)) return i + 1;
     }
 
     return flashes;
