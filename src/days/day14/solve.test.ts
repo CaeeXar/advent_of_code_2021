@@ -1,4 +1,4 @@
-import { solvePartOne } from "./solve";
+import { solvePartOne, solvePartTwo } from "./solve";
 
 describe("Part one", () => {
     test("solves the example", () => {
@@ -48,7 +48,7 @@ BC -> B
 CC -> N
 CN -> C`;
 
-        const result = solvePartOne(input);
+        const result = solvePartTwo(input);
 
         expect(result).toEqual(2188189693529);
     });
