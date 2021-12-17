@@ -34,12 +34,12 @@ describe("Part one", () => {
     });
 });
 
-// describe("Part one", () => {
-//     test("solves the example", () => {
-//         const input = ``;
+describe("Part one", () => {
+    test("solves the example", () => {
+        const input = `C200B40A82`;
 
-//         const result = solvePartTwo(input);
+        const result = solvePartTwo(input);
 
-//         expect(result).toEqual(315);
-//     });
-// });
+        expect(result).toEqual(3);
+    });
+});

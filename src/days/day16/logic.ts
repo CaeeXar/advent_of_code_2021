@@ -48,7 +48,7 @@ const createOperatorPacket = (binary: string) => {
             binary = data.binary;
         }
     } else {
-        for (let i = 0; i < parseInt(bin2dec(op.length)); i++) {
+        for (let i = 0; i < len; i++) {
             let data;
             if (binary.substring(3, 6) === '100') data = createLiteralPacket(binary);
             else data = createOperatorPacket(binary);
@@ -63,7 +63,7 @@ const createOperatorPacket = (binary: string) => {
 const createPackets = (binary: string) => {
     let lps = [], ops: OperatorPacket[] = [];
 
-    while (!binary.match(/^0+$/)) {
+    while (!binary.match(/^0*$/)) {
         let p;
 
         if (binary.substring(3, 6) === '100') {
@@ -74,7 +74,7 @@ const createPackets = (binary: string) => {
             ops.push(p.packet);
         }
 
-        binary = ((p || {}).binary) || binary;
+        binary = ((p || {}).binary);
     }
 
     return [lps, ops];
@@ -91,24 +91,21 @@ const _sumBy = (key: "versionId", packet: any): number => {
     }, 0);
 };
 
-export const sumBy = (key: "versionId", binary: string) => {
+export const sumBy = (binary: string) => {
     let x = createPackets(binary),
         lps: any[] = x[0],
         ops: any[] = x[1],
         sum = 0;
 
     lps.forEach((p: LiteralPacket) => {
-        sum += parseInt(bin2dec(p[key]));
+        sum += parseInt(bin2dec(p["versionId"]));
     });
 
-    // ops.forEach((p: OperatorPacket) => {
-    //     p.packets.map((d: OperatorPacket | LiteralPacket) => {
-    //         if (d.versionId === '100') sum += parseInt(bin2dec(d[key]));
-    //         else 
-    //     });
-    // });
-
-    sum += _.sum(ops.map(d => _sumBy(key, d)));
+    sum += _.sum(ops.map(d => _sumBy("versionId", d)));
 
     return sum;
+};
+
+export const calculateValue = (binary: string) => {
+    return 0;
 };
