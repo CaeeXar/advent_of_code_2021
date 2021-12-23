@@ -1,3 +1,9 @@
-export const solvePartOne = (input: string) => {};
+import { findFloor, findFloorAt } from "./logic";
 
-export const solvePartTwo = (input: string) => {};
+export const solvePartOne = (input: string) => {
+    return findFloor(input);
+};
+
+export const solvePartTwo = (input: string) => {
+    return findFloorAt(input, -1);
+};
