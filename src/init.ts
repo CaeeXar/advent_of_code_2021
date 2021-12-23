@@ -19,7 +19,7 @@ const turner = new turndown({
   emDelimiter: "**" as any, // format italic as bold too
 });
 
-export default async (day: string) => {
+export default async (year: string, day: string) => {
   const value = (day.match(/day(\d+)/) ?? day.match(/(\d+)/))?.[1];
   if (!value) {
     log.error(`Invalid input "${day}"`);
@@ -36,13 +36,13 @@ export default async (day: string) => {
   const parsedDay = parseInt(value);
 
   const directoryName = `day${parsedDay.toString().padStart(2, "0")}`;
-  const basePath = join(__dirname, "days", directoryName);
+  const basePath = join(__dirname, year, directoryName);
 
   log.verbose("Check if day already exists");
   if (existsSync(basePath)) {
     log.info("Day already exists, will gather README for Part Two");
 
-    await saveReadme(basePath, parsedDay, 2);
+    await saveReadme(basePath, year, parsedDay, 2);
 
     return;
   }
@@ -54,12 +54,12 @@ export default async (day: string) => {
 
   log.info("Directory created");
 
-  await saveReadme(basePath, parsedDay, 1);
+  await saveReadme(basePath, year, parsedDay, 1);
 
   log.info("Retrieve input data");
 
   const inputFileContent = await fetch(
-    `https://adventofcode.com/${process.env.YEAR}/day/${parsedDay}/input`,
+    `https://adventofcode.com/${year}/day/${parsedDay}/input`,
   );
 
   writeFileSync(
@@ -72,11 +72,11 @@ export default async (day: string) => {
   log.log("success", "Saved input file");
 };
 
-const saveReadme = async (basePath: string, day: any, part: 1 | 2) => {
+const saveReadme = async (basePath: string, year: any, day: any, part: 1 | 2) => {
   log.info("Fetching README");
   // retrieve README for that day
   const readmeData = await fetch(
-    `https://adventofcode.com/${process.env.YEAR}/day/${day}`,
+    `https://adventofcode.com/${year}/day/${day}`,
   );
 
   log.verbose("Transforming README");

@@ -2,12 +2,13 @@ import { DaySolver, Day } from "./types";
 import { log } from "./logging";
 
 export const runDay = async (
+  year: string,
   day: string,
   options: { runPartOne: boolean; runPartTwo: boolean },
 ) => {
-  log.info(`Running ${day}`);
+  log.info(`Running ${year} ${day}`);
 
-  const theDay: Day = await import(`./days/${day}`);
+  const theDay: Day = await import(`./${year}/${day}`);
   if (!theDay) {
     log.error("Day not found");
     return;
