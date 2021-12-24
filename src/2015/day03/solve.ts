@@ -1,9 +1,9 @@
-import { calcCirections, calcCirectionsWithRobo } from "./logic";
+import { calcDirections, calcDirectionsWithRobo } from "./logic";
 
 export const solvePartOne = (input: string) => {
-    return calcCirections(input);
+    return calcDirections(input);
 };
 
 export const solvePartTwo = (input: string) => {
-    return calcCirectionsWithRobo(input);
+    return calcDirectionsWithRobo(input);
 };

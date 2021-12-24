@@ -1,29 +1,4 @@
-import _ from "lodash";
-
-const getNewPosition = (dir: string, x: number, y: number): number[] => {
-    let newX = 0, newY = 0;
-
-    switch (dir) {
-        case "^":
-            newY = y - 1;
-            break;
-        case "v":
-            newY = y + 1;
-            break;
-        case ">":
-            newX = x + 1;
-            break;
-        case "<":
-            newX = x - 1;
-            break;
-    }
-
-    return [newX, newY];
-};
-
-const key = (x: number, y: number) => x + "," + y;
-
-export const calcCirections = (input: string) => {
+export const calcDirections = (input: string) => {
     let posX = 0, posY = 0, houses: { [key: string]: number } = { "0,0": 1 };
     for (let i = 0; i < input.length; i++) {
         switch (input[i]) {
@@ -47,21 +22,29 @@ export const calcCirections = (input: string) => {
     return Object.keys(houses).length;
 };
 
-export const calcCirectionsWithRobo = (input: string) => {
-    let xS = 0, yS = 0, xR = 0, yR = 0,
-        houses: { [key: string]: number } = { "0,0": 1 };
+export const calcDirectionsWithRobo = (input: string) => {
+    let positions: { [key: number]: { x: number, y: number } } = { 0: { x: 0, y: 0 }, 1: { x: 0, y: 0 } },
+        houses: { [key: string]: number } = { '0:0': 2 };
 
     for (let i = 0; i < input.length; i++) {
-        let v = input[i];
-        if (i % 2 === 1) {
-            [xS, yS] = getNewPosition(v, xS, yS);
-            houses[key(xS, yS)] = (!!houses[key(xS, yS)] ? houses[key(xS, yS)] : 0) + 1;
-        } else {
-            [xR, yR] = getNewPosition(v, xR, yR);
-            houses[key(xR, yR)] = (!!houses[key(xR, yR)] ? houses[key(xR, yR)] : 0) + 1;
+        let pos = i % 2;
+        switch (input[i]) {
+            case '^':
+                positions[pos].y++;
+                break;
+            case '>':
+                positions[pos].x++;
+                break;
+            case 'v':
+                positions[pos].y--;
+                break;
+            case '<':
+                positions[pos].x--;
+                break;
         }
+        let index = positions[pos].x + ':' + positions[pos].y;
+        houses[index] ? houses[index]++ : houses[index] = 1;
     }
 
-    console.log(houses)
     return Object.keys(houses).length;
 };
