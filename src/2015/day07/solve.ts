@@ -1,3 +1,8 @@
-export const solvePartOne = (input: string) => {};
+import _ from "lodash";
+import { parsePartOne, parsePartTwo } from "./parse";
 
-export const solvePartTwo = (input: string) => {};
+export const solvePartOne = (input: string) => {
+    return parsePartOne(input);
+};
+
+export const solvePartTwo = (input: string) => { };
